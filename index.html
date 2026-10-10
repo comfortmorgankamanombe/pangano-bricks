@@ -70,51 +70,69 @@
 
 <main>
 
-  <!-- ===================== HERO: advert slider + words, never overlapping ===================== -->
+  <!-- ===================== HERO: designed banner slider ===================== -->
   <section class="hero">
-    <div class="hero-grid">
-      <div class="ad-slider" data-slider aria-roledescription="carousel" aria-label="Pangano Bricks adverts">
-        <div class="ad-track">
-          <figure class="ad-slide">
-            <img src="assets/img/ad-brick-types.jpg" alt="Pangano Bricks advert: a stack of six brick colours and textures — different bricks for different structures and environments" width="1280" height="853" />
-            <figcaption class="ad-caption">Different bricks for different jobs <a href="#bricks">See types →</a></figcaption>
-          </figure>
-          <figure class="ad-slide">
-            <img src="assets/img/ad-paving-trihex-sm.jpg" alt="Pangano Bricks advert: red, charcoal and grey interlocking pavers laid along a garden walkway" width="720" height="680" loading="lazy" />
-            <figcaption class="ad-caption">Interlocking paving for walkways &amp; patios <a href="#paving">See paving →</a></figcaption>
-          </figure>
-          <figure class="ad-slide">
-            <img src="assets/img/ad-paving-herringbone-sm.jpg" alt="Pangano Bricks advert: grey herringbone paving with a cream border beside a garden bed" width="720" height="720" loading="lazy" />
-            <figcaption class="ad-caption">Driveways, borders &amp; edging <a href="#paving">See paving →</a></figcaption>
-          </figure>
-          <figure class="ad-slide">
-            <img src="assets/img/ad-delivery.jpg" alt="Pangano Bricks advert: delivery truck — brick delivery, right to your site" width="1225" height="588" loading="lazy" />
-            <figcaption class="ad-caption">Brick delivery, right to your site <a href="#delivery">How it works →</a></figcaption>
-          </figure>
-        </div>
-        <div class="ad-controls">
-          <button class="ad-arrow" type="button" data-prev aria-label="Previous advert">‹</button>
-          <div class="ad-dots"></div>
-          <button class="ad-arrow" type="button" data-next aria-label="Next advert">›</button>
-        </div>
-      </div>
+    <div class="banner-slider" data-slider aria-roledescription="carousel" aria-label="Pangano Bricks highlights">
+      <div class="ad-track">
 
-      <div class="hero-copy">
-        <p class="eyebrow">Zimbabwean-made, yard-direct</p>
-        <h1>Building dreams,<br /><em>brick by brick.</em></h1>
-        <p class="hero-sub">Pangano Bricks makes common bricks, face bricks, rustic bricks, paving and flooring tiles, and delivers them straight from our yard to your site.</p>
-        <div class="hero-actions">
-          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263772360468?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
-            <svg class="icon"><use href="#i-wa"/></svg> Order on WhatsApp
-          </a>
-          <a class="btn btn-outline btn-lg" href="#bricks">Which brick do I need?</a>
+        <div class="banner" role="group" aria-label="1 of 3">
+          <div class="banner-art">
+            <img class="cut-stack" src="assets/img/cut-brick-stack.png" alt="Six bricks stacked: red, chevron-textured, terracotta, grey, brown and yellow" width="501" height="788" />
+            <span class="badge b1"><i><svg viewBox="0 0 24 24"><path d="M3 6h18v4H3zM3 14h18v4H3zM9 6v4M15 10v4M9 14v4"/></svg></i>Common</span>
+            <span class="badge b2 gold"><i><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg></i>Face</span>
+            <span class="badge b3"><i><svg viewBox="0 0 24 24"><path d="M4 20V8l8-5 8 5v12M9 20v-6h6v6"/></svg></i>Rustic</span>
+          </div>
+          <div class="banner-copy">
+            <p class="eyebrow">Kiln-fired · Zimbabwean-made</p>
+            <h1>Different bricks for <span class="hl">every build.</span></h1>
+            <p class="banner-sub">Common, face and rustic face bricks, made in our own kilns and sold straight from the yard.</p>
+            <div class="banner-actions">
+              <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263772360468?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Order on WhatsApp</a>
+              <a class="btn btn-glass btn-lg" href="#bricks">See brick types</a>
+            </div>
+          </div>
         </div>
-        <ul class="hero-points">
-          <li>Made in our own kilns</li>
-          <li>We deliver anywhere</li>
-          <li>Any quantity</li>
-          <li>Open 24 hours</li>
-        </ul>
+
+        <div class="banner warm" role="group" aria-label="2 of 3">
+          <div class="banner-art">
+            <img class="cut-circle" src="assets/img/cut-paving-circle.png" alt="Red, charcoal and grey interlocking pavers" width="720" height="720" loading="lazy" />
+            <span class="badge b1 gold"><i><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg></i>Driveways</span>
+            <span class="badge b2"><i><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V10l6-5 6 5v10"/></svg></i>Patios</span>
+            <span class="badge b3 gold"><i><svg viewBox="0 0 24 24"><path d="M5 21l4-18M15 3l4 18M12 6v2M12 11v2M12 16v2"/></svg></i>Walkways</span>
+          </div>
+          <div class="banner-copy">
+            <p class="eyebrow" style="color:#ffd27a">Paving &amp; tiles</p>
+            <h2>Paving that <span class="hl">turns heads.</span></h2>
+            <p class="banner-sub">Interlocking pavers, herringbone driveways, borders and flooring tiles in red, charcoal and grey.</p>
+            <div class="banner-actions">
+              <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263772360468?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20to%20ask%20about%20paving." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Ask about paving</a>
+              <a class="btn btn-glass btn-lg" href="#paving">See paving</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner light" role="group" aria-label="3 of 3">
+          <div class="banner-art">
+            <img class="cut-truck" src="assets/img/ad-delivery-sm.jpg" alt="Pangano Bricks delivery truck — brick delivery, right to your site" width="720" height="346" loading="lazy" />
+            <span class="badge b1 green"><i><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></i>Anywhere</span>
+            <span class="cube">24/7<small>OPEN</small></span>
+          </div>
+          <div class="banner-copy">
+            <p class="eyebrow">Delivery</p>
+            <h2>Delivered <span class="hl">anywhere.</span><br />Open 24/7.</h2>
+            <p class="banner-sub">Stacked, strapped and loaded by our own team, straight from the yard to your site.</p>
+            <div class="banner-actions">
+              <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263772360468?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20delivery%20quote.%20My%20site%20is%20in%3A%20" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Get a delivery quote</a>
+              <a class="btn btn-glass btn-lg" href="#delivery">How it works</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="ad-controls">
+        <button class="ad-arrow" type="button" data-prev aria-label="Previous slide">‹</button>
+        <div class="ad-dots"></div>
+        <button class="ad-arrow" type="button" data-next aria-label="Next slide">›</button>
       </div>
     </div>
   </section>
