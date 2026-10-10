@@ -4,18 +4,25 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script>
-  // Set the theme before first paint so there's no flash of the wrong
-  // theme. Mirrors the toggle logic in script.js.
+  // Set the theme before first paint (no flash of the wrong theme) and
+  // flag that JS is running so scroll-reveal can hide content safely.
   (function () {
+    var d = document.documentElement; d.className += " js";
     try {
       var saved = localStorage.getItem("pangano-theme");
-      var theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
+      d.setAttribute("data-theme", saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
     } catch (e) {}
   })();
 </script>
 <title>Contact — Pangano Bricks</title>
-<meta name="description" content="Message Pangano Bricks on WhatsApp for a quote on bricks, paving and flooring." />
+<meta name="description" content="Message Pangano Bricks on WhatsApp for a quote on bricks, paving and flooring tiles. FAQs on delivery, quantities and payment." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Contact — Pangano Bricks" />
+<meta property="og:description" content="Common, face and rustic bricks, paving and flooring tiles. Yard-direct, delivered to your site. Order on WhatsApp." />
+<meta property="og:image" content="assets/img/og-card.jpg" />
+<meta name="theme-color" content="#1a1e24" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/img/icon-180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,106 +30,173 @@
 </head>
 <body>
 
+<svg class="icon-sprite" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></symbol>
+</svg>
+
+<!-- WhatsApp number placeholder: replace 263000000000 in every page with the real number. -->
+
+<!-- ===================== HEADER ===================== -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="index.html" class="brand">
-      <img src="assets/images/logo.jpeg" alt="Pangano Bricks" class="brand-logo" />
+    <a href="index.html" class="brand" aria-label="Pangano Bricks home">
+      <img src="assets/img/logo-light-compact.png" alt="Pangano Bricks" class="brand-logo" width="640" height="288" />
     </a>
-    <nav class="main-nav" id="mainNav">
+    <nav class="main-nav" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
     <a class="btn btn-whatsapp header-cta" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" class="icon-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></svg>
-      Get a Quote
+      <svg class="icon"><use href="#i-wa"/></svg> Get a Quote
     </a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+    <button class="round-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
       <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
       <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20.5 13.8A8.5 8.5 0 1 1 10.2 3.5a6.7 6.7 0 0 0 10.3 10.3z"/></svg>
     </button>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+    <button class="round-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html" data-i="0">Home</a>
-  <a href="products.html" data-i="1">Products</a>
-  <a href="about.html" data-i="2">About</a>
-  <a href="contact.html" data-i="3">Contact</a>
-  <a class="btn btn-whatsapp" data-i="4" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">Get a Quote on WhatsApp</a>
-</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a class="btn btn-whatsapp" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Get a Quote on WhatsApp</a>
+</nav>
 
 <main>
 
   <section class="page-hero">
-    <div class="page-hero-media"><img src="assets/images/brick-closeup.jpg" alt="Close-up detail of a Pangano Bricks brick" /></div>
-    <div class="reveal">
+    <div class="wrap reveal">
       <p class="eyebrow">Get in touch</p>
       <h1>Let's talk about your project.</h1>
-      <p>No forms, no waiting on hold, just a straight message about what you're building and what you need.</p>
+      <p>No forms, no waiting on hold. Just send a message about what you're building and what you need.</p>
     </div>
   </section>
 
-  <section class="cta" id="contact" style="margin-top:64px;">
-    <div class="reveal">
+  <div class="cta-wrap" style="padding-top:56px;">
+    <section class="cta reveal">
       <h2>Message us on WhatsApp</h2>
       <p>Tell us what you're building, the quantities you need and where the site is, and we'll quote it straight back.</p>
-      <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" class="icon-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></svg>
-        Open WhatsApp Chat
-      </a>
-      <p style="margin-top:22px; font-size:0.88rem; color:rgba(255,255,255,0.8);">We reply as soon as we can during working hours.</p>
+      <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Open WhatsApp Chat</a>
+      <small>We reply as soon as we can during working hours.</small>
+    </section>
+  </div>
+
+  <!-- TODO (client details needed): add yard address, opening hours, phone
+       number and a Google Maps embed here once Pangano confirms them. -->
+
+  <section class="alt-bg">
+    <div class="section-head reveal">
+      <p class="eyebrow">Before you message</p>
+      <h2>Send these and we'll quote faster</h2>
+    </div>
+    <div class="info-grid" data-stagger>
+      <div class="info-card reveal">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18v4H3zM3 14h18v4H3zM9 6v4M15 10v4M9 14v4"/></svg>
+        <h3>What you need</h3>
+        <p>Common, face or rustic bricks, paving or tiles, and roughly how many.</p>
+      </div>
+      <div class="info-card reveal">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <h3>Where it's going</h3>
+        <p>Your site location (a WhatsApp location pin is perfect) so we can confirm delivery.</p>
+      </div>
+      <div class="info-card reveal">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>When you need it</h3>
+        <p>Your rough timeline, or the build phases if you want deliveries spread out.</p>
+      </div>
     </div>
   </section>
 
-  <div class="tile-band" role="presentation" aria-hidden="true"></div>
-
-  <section class="services" style="padding-bottom:84px;">
+  <section id="faq">
     <div class="section-head reveal">
-      <p class="eyebrow">Before you message</p>
-      <h2>Helps us quote faster</h2>
+      <p class="eyebrow">FAQs</p>
+      <h2>Common questions</h2>
     </div>
-    <div class="services-grid" data-stagger style="max-width:900px;">
-      <article class="service-card reveal">
-        <div class="service-media-solid">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 4v16"/></svg>
-        </div>
-        <h3>What you need</h3>
-        <p>Bricks, paving, flooring, or a mix, and roughly how many units.</p>
-      </article>
-      <article class="service-card reveal">
-        <div class="service-media-solid">
-          <svg viewBox="0 0 24 24"><path d="M3 13h13v5H3zM16 13h2l3 3v2h-5zM5 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-        </div>
-        <h3>Where it's going</h3>
-        <p>Your site location, so we can confirm delivery is possible.</p>
-      </article>
-      <article class="service-card reveal">
-        <div class="service-media-solid">
-          <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
-        </div>
-        <h3>When you need it</h3>
-        <p>Your rough timeline, so we can slot the order in.</p>
-      </article>
+    <div class="faq reveal">
+      <details>
+        <summary>Which brick should I use?</summary>
+        <p>Common bricks for foundations and any wall you'll plaster; face bricks for walls you want to leave bare; rustic face bricks for pillars, feature walls and braai areas. See the full <a class="btn-ghost-dark" href="products.html#guide">brick guide</a>, or send us your plan and we'll advise.</p>
+      </details>
+      <details>
+        <summary>Do you deliver to my area?</summary>
+        <p>Delivery depends on your location and the size of the order. Send us your site location on WhatsApp and we'll confirm availability and the delivery cost with your quote.</p>
+      </details>
+      <details>
+        <summary>Is there a minimum order?</summary>
+        <p>We take custom quantities. Tell us what you need and we'll quote it, including whether delivery or collection makes more sense for the size of the order.</p>
+      </details>
+      <details>
+        <summary>Can I collect from the yard?</summary>
+        <p>Ask us on WhatsApp and we'll arrange a collection time and give you directions to the yard.</p>
+      </details>
+      <details>
+        <summary>Can I split deliveries across my build?</summary>
+        <p>Yes. Tell us the phases of your project (foundation, walls, paving) and we can schedule deliveries to match, so bricks aren't sitting on site for months.</p>
+      </details>
+      <details>
+        <summary>How do I pay?</summary>
+        <p>Payment options are confirmed with your quote on WhatsApp. Only pay using the details given by our official number (see below).</p>
+      </details>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="notice reveal" role="note">
+      <svg viewBox="0 0 24 24"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.5"/></svg>
+      <p><strong>Beware of fake suppliers.</strong> Pangano Bricks only takes orders and payments through our official WhatsApp number linked on this website. If someone claiming to be Pangano asks you to pay into a different account, don't pay. Message us to confirm first.</p>
     </div>
   </section>
 
 </main>
 
+<!-- ===================== FOOTER ===================== -->
 <footer class="site-footer">
-  <img src="assets/images/logo.jpeg" alt="Pangano Bricks" class="footer-logo" />
-  <nav class="footer-nav">
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <p>&copy; <span id="year"></span> Pangano Bricks. Stronger Bricks. Solid Futures.</p>
+  <div class="footer-grid">
+    <div>
+      <img src="assets/img/logo-light.png" alt="Pangano Bricks — building dreams, brick by brick" class="footer-logo" width="640" height="303" loading="lazy" />
+      <p>Bricks, paving and flooring, manufactured in our own yard and delivered to your site.</p>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <ul>
+        <li><a href="products.html#common">Common bricks</a></li>
+        <li><a href="products.html#face">Face bricks</a></li>
+        <li><a href="products.html#rustic">Rustic bricks</a></li>
+        <li><a href="products.html#paving">Paving &amp; tiles</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="about.html#process">How we make bricks</a></li>
+        <li><a href="products.html#guide">Brick guide</a></li>
+        <li><a href="contact.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Order</h4>
+      <ul>
+        <li><a class="footer-wa" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">WhatsApp us</a></li>
+        <li><a href="contact.html">Contact page</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span id="year"></span> Pangano Bricks. Building dreams, brick by brick.</span>
+    <span>We only take orders through our official WhatsApp number.</span>
+  </div>
 </footer>
+
+<a class="wa-float" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener" aria-label="Chat with Pangano Bricks on WhatsApp"><svg class="icon"><use href="#i-wa"/></svg></a>
 
 <script src="script.js"></script>
 </body>

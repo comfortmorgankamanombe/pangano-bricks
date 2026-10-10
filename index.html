@@ -4,18 +4,25 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script>
-  // Set the theme before first paint so there's no flash of the wrong
-  // theme. Mirrors the toggle logic in script.js.
+  // Set the theme before first paint (no flash of the wrong theme) and
+  // flag that JS is running so scroll-reveal can hide content safely.
   (function () {
+    var d = document.documentElement; d.className += " js";
     try {
       var saved = localStorage.getItem("pangano-theme");
-      var theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
+      d.setAttribute("data-theme", saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
     } catch (e) {}
   })();
 </script>
-<title>Pangano Bricks — Stronger Bricks. Solid Futures.</title>
-<meta name="description" content="Pangano Bricks manufactures and delivers quality bricks, paving and flooring materials for construction projects of every size." />
+<title>Pangano Bricks — Building dreams, brick by brick</title>
+<meta name="description" content="Pangano Bricks manufactures common bricks, face bricks, rustic bricks, paving and flooring tiles, delivered straight from our yard to your site in Zimbabwe." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Pangano Bricks — Building dreams, brick by brick" />
+<meta property="og:description" content="Common, face and rustic bricks, paving and flooring tiles. Yard-direct, delivered to your site. Order on WhatsApp." />
+<meta property="og:image" content="assets/img/og-card.jpg" />
+<meta name="theme-color" content="#1a1e24" />
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+<link rel="apple-touch-icon" href="assets/img/icon-180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,157 +30,307 @@
 </head>
 <body>
 
+<svg class="icon-sprite" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></symbol>
+</svg>
+
+<!-- WhatsApp number placeholder: replace 263000000000 in every page with the real number. -->
+
 <!-- ===================== HEADER ===================== -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="index.html" class="brand">
-      <img src="assets/images/logo.jpeg" alt="Pangano Bricks" class="brand-logo" />
+    <a href="index.html" class="brand" aria-label="Pangano Bricks home">
+      <img src="assets/img/logo-light-compact.png" alt="Pangano Bricks" class="brand-logo" width="640" height="288" />
     </a>
-    <nav class="main-nav" id="mainNav">
+    <nav class="main-nav" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="products.html">Products</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
     <a class="btn btn-whatsapp header-cta" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" class="icon-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></svg>
-      Get a Quote
+      <svg class="icon"><use href="#i-wa"/></svg> Get a Quote
     </a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+    <button class="round-btn theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
       <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
       <svg class="icon-moon" viewBox="0 0 24 24"><path d="M20.5 13.8A8.5 8.5 0 1 1 10.2 3.5a6.7 6.7 0 0 0 10.3 10.3z"/></svg>
     </button>
-    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+    <button class="round-btn nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<!-- Full-screen mobile nav overlay -->
-<div class="mobile-nav" id="mobileNav">
-  <a href="index.html" data-i="0">Home</a>
-  <a href="products.html" data-i="1">Products</a>
-  <a href="about.html" data-i="2">About</a>
-  <a href="contact.html" data-i="3">Contact</a>
-  <a class="btn btn-whatsapp" data-i="4" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">Get a Quote on WhatsApp</a>
-</div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+  <a href="index.html">Home</a>
+  <a href="products.html">Products</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a class="btn btn-whatsapp" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Get a Quote on WhatsApp</a>
+</nav>
 
 <main>
 
-  <!-- ===================== HERO ===================== -->
-  <section class="hero" id="home">
-    <div class="hero-media">
-      <img src="assets/images/delivery-lorry-bw.png" alt="Pangano Bricks delivery lorry loaded with bricks" />
-      <div class="hero-scrim"></div>
-    </div>
-    <div class="hero-content reveal">
-      <p class="eyebrow">Zimbabwean-made, yard-direct</p>
-      <h1>Stronger bricks.<br />Solid futures.</h1>
-      <p class="hero-sub">Pangano Bricks manufactures and delivers quality bricks, paving and flooring for homes, sites and commercial builds, straight from our yard to yours.</p>
-      <div class="hero-actions">
-        <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" class="icon-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></svg>
-          Order on WhatsApp
-        </a>
-        <a class="btn btn-ghost btn-lg" href="products.html">See our products</a>
+  <!-- ===================== HERO: advert slider + words, never overlapping ===================== -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="ad-slider" data-slider aria-roledescription="carousel" aria-label="Pangano Bricks adverts">
+        <div class="ad-track">
+          <figure class="ad-slide">
+            <img src="assets/img/ad-brick-types.jpg" alt="Pangano Bricks advert: a stack of six brick colours and textures — different bricks for different structures and environments" width="1280" height="853" />
+            <figcaption class="ad-caption">Different bricks for different jobs <a href="#bricks">See types →</a></figcaption>
+          </figure>
+          <figure class="ad-slide">
+            <img src="assets/img/ad-paving-trihex-sm.jpg" alt="Pangano Bricks advert: red, charcoal and grey interlocking pavers laid along a garden walkway" width="720" height="680" loading="lazy" />
+            <figcaption class="ad-caption">Interlocking paving for walkways &amp; patios <a href="#paving">See paving →</a></figcaption>
+          </figure>
+          <figure class="ad-slide">
+            <img src="assets/img/ad-paving-herringbone-sm.jpg" alt="Pangano Bricks advert: grey herringbone paving with a cream border beside a garden bed" width="720" height="720" loading="lazy" />
+            <figcaption class="ad-caption">Driveways, borders &amp; edging <a href="#paving">See paving →</a></figcaption>
+          </figure>
+          <figure class="ad-slide">
+            <img src="assets/img/ad-delivery.jpg" alt="Pangano Bricks advert: delivery truck — brick delivery, right to your site" width="1225" height="588" loading="lazy" />
+            <figcaption class="ad-caption">Brick delivery, right to your site <a href="#delivery">How it works →</a></figcaption>
+          </figure>
+        </div>
+        <div class="ad-controls">
+          <button class="ad-arrow" type="button" data-prev aria-label="Previous advert">‹</button>
+          <div class="ad-dots"></div>
+          <button class="ad-arrow" type="button" data-next aria-label="Next advert">›</button>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="eyebrow">Zimbabwean-made, yard-direct</p>
+        <h1>Building dreams,<br /><em>brick by brick.</em></h1>
+        <p class="hero-sub">Pangano Bricks makes common bricks, face bricks, rustic bricks, paving and flooring tiles, and delivers them straight from our yard to your site.</p>
+        <div class="hero-actions">
+          <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
+            <svg class="icon"><use href="#i-wa"/></svg> Order on WhatsApp
+          </a>
+          <a class="btn btn-outline btn-lg" href="#bricks">Which brick do I need?</a>
+        </div>
+        <ul class="hero-points">
+          <li>Made in our own kilns</li>
+          <li>Delivered to site</li>
+          <li>Any quantity</li>
+        </ul>
       </div>
     </div>
-    <a href="#services" class="scroll-cue" aria-label="Scroll down"><span></span></a>
   </section>
 
-  <!-- ===================== TRUST STRIP (honest, no invented numbers) ===================== -->
-  <section class="trust-strip reveal">
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      <span>Manufactured locally, yard-direct pricing</span>
-    </div>
-    <div class="trust-item">
+  <!-- ===================== QUICK TILES ===================== -->
+  <nav class="quick-tiles" aria-label="Shortcuts">
+    <a class="quick-tile" href="#bricks">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18v4H3zM3 14h18v4H3zM9 6v4M15 10v4M9 14v4"/></svg>
+      Bricks <small>Common, face &amp; rustic</small>
+    </a>
+    <a class="quick-tile" href="#paving">
+      <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z"/></svg>
+      Paving &amp; tiles <small>Driveways, patios, floors</small>
+    </a>
+    <a class="quick-tile" href="#delivery">
       <svg viewBox="0 0 24 24"><path d="M3 13h13v5H3zM16 13h2l3 3v2h-5zM5 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM18 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
-      <span>Delivery straight to your site</span>
-    </div>
-    <div class="trust-item">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 9h16M9 4v16"/></svg>
-      <span>Custom order quantities welcome</span>
-    </div>
-  </section>
+      Delivery <small>Straight to your site</small>
+    </a>
+    <a class="quick-tile wa" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><use href="#i-wa"/></svg>
+      Get a quote <small>Reply on WhatsApp</small>
+    </a>
+  </nav>
 
-  <!-- Tiled brick coursing band -->
-  <div class="tile-band" role="presentation" aria-hidden="true"></div>
-
-  <!-- ===================== SERVICES TEASER ===================== -->
-  <section class="services" id="services">
+  <!-- ===================== BRICK TYPES ===================== -->
+  <section id="bricks">
     <div class="section-head reveal">
-      <p class="eyebrow">What we offer</p>
-      <h2>Everything for the build, under one yard</h2>
+      <p class="eyebrow">Our bricks</p>
+      <h2>The right brick for every part of the build</h2>
+      <p>Every brick is moulded, dried and fired at our own yard. Here's what we make and where each one belongs.</p>
     </div>
-    <div class="services-grid" data-stagger>
-      <article class="service-card reveal">
-        <div class="service-media" style="background-image:url('assets/images/brick-variety.jpg')"></div>
-        <h3>Brick Manufacturing</h3>
-        <p>High-quality bricks manufactured for residential, commercial and construction projects, built to hold up.</p>
+    <div class="card-grid three" data-stagger>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/brick-common-sm.jpg" alt="Cubes of Pangano common bricks stacked in the yard" loading="lazy" width="720" height="540" /></div>
+        <div class="p-card-body">
+          <h3>Common Bricks</h3>
+          <p>Our everyday, hard-burnt clay brick. Strong, consistent and affordable: the workhorse for any wall that will be plastered.</p>
+          <p class="uses-label">Best for</p>
+          <ul class="chips"><li>Foundations</li><li>Load-bearing walls</li><li>Plastered walls</li><li>Boundary walls</li></ul>
+          <a class="btn-ghost-dark" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote%20for%20common%20bricks." target="_blank" rel="noopener">Quote for common bricks →</a>
+        </div>
       </article>
-      <article class="service-card reveal">
-        <div class="service-media" style="background-image:url('assets/images/pallets-ready.jpg')"></div>
-        <h3>Delivery Services</h3>
-        <p>Bricks delivered straight to your construction site, subject to location and order size, no collection hassle.</p>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/brick-face-sm.jpg" alt="A pallet of Pangano smooth face bricks with clean edges" loading="lazy" width="540" height="720" /></div>
+        <div class="p-card-body">
+          <h3>Face Bricks</h3>
+          <p>Clean edges and an even finish, made to be seen. Build it once and leave it bare, with no plaster and no paint to maintain.</p>
+          <p class="uses-label">Best for</p>
+          <ul class="chips"><li>House exteriors</li><li>Unplastered walls</li><li>Boundary walls</li><li>Low maintenance</li></ul>
+          <a class="btn-ghost-dark" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote%20for%20face%20bricks." target="_blank" rel="noopener">Quote for face bricks →</a>
+        </div>
       </article>
-      <article class="service-card reveal">
-        <div class="service-media" style="background-image:url('assets/images/flooring-tiles.png')"></div>
-        <h3>Flooring &amp; Paving</h3>
-        <p>Concrete paving and flooring tiles for driveways, walkways and outdoor spaces, stacked and ready.</p>
-      </article>
-      <article class="service-card reveal">
-        <div class="service-media" style="background-image:url('assets/images/brick-closeup.jpg')"></div>
-        <h3>Custom Orders</h3>
-        <p>Need a specific quantity or product mix? Message us on WhatsApp and we'll sort it out directly.</p>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/brick-rustic-sm.jpg" alt="A pallet of Pangano rustic bricks with rough, multi-tone faces" loading="lazy" width="540" height="720" /></div>
+        <div class="p-card-body">
+          <h3>Rustic Face Bricks</h3>
+          <p>A rough, textured face with natural dark-to-red tones from the kiln. No two walls look the same, which gives you character without extra cost.</p>
+          <p class="uses-label">Best for</p>
+          <ul class="chips"><li>Pillars &amp; gate posts</li><li>Feature walls</li><li>Braai areas</li><li>Garden walls</li></ul>
+          <a class="btn-ghost-dark" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote%20for%20rustic%20bricks." target="_blank" rel="noopener">Quote for rustic bricks →</a>
+        </div>
       </article>
     </div>
-    <p class="reveal" style="text-align:center; margin-top:38px;">
-      <a class="btn btn-ghost-dark" href="products.html">See full product details →</a>
+    <p class="reveal" style="text-align:center; margin-top:32px;">
+      <a class="btn-ghost-dark" href="products.html#guide">Full &ldquo;which brick for which job&rdquo; guide →</a>
     </p>
   </section>
 
-  <!-- ===================== ABOUT TEASER ===================== -->
-  <section class="about" id="about">
-    <div class="about-media reveal">
-      <img src="assets/images/paved-walkway.png" alt="Paving laid at a Pangano Bricks project site" />
-    </div>
-    <div class="about-copy reveal">
-      <p class="eyebrow">About Pangano Bricks</p>
-      <h2>Built on quality, run from the yard.</h2>
-      <p>Pangano Bricks makes and supplies bricks, paving and flooring materials for builders across Zimbabwe, from single-room extensions to full commercial sites. No middlemen, no marked-up resellers, just materials straight from where they're made.</p>
-      <a class="btn btn-ghost-dark" href="about.html">Learn more about us →</a>
+  <!-- ===================== THE BRICK ADVERT, FULL SIZE ===================== -->
+  <section class="alt-bg">
+    <div class="feature">
+      <div class="feature-media reveal">
+        <img src="assets/img/ad-brick-types-sm.jpg" srcset="assets/img/ad-brick-types-sm.jpg 720w, assets/img/ad-brick-types.jpg 1280w" sizes="(min-width: 900px) 620px, 100vw" alt="Six brick colours and textures stacked: red, chevron-textured, terracotta, grey, brown and yellow" loading="lazy" width="1280" height="853" />
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">Colours &amp; finishes</p>
+        <h2>Different bricks for different structures and environments.</h2>
+        <p>The clay, the firing and the face all change how a brick looks and how it handles sun, rain and load. Tell us what you're building and where, and we'll match the brick to the job, not just sell you whatever is on the pile.</p>
+        <a class="btn btn-whatsapp" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20can%20you%20help%20me%20choose%20a%20brick%3F" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Help me choose</a>
+      </div>
     </div>
   </section>
 
-  <!-- Tiled brick coursing band -->
-  <div class="tile-band" role="presentation" aria-hidden="true"></div>
+  <!-- ===================== PAVING & TILES ===================== -->
+  <section id="paving">
+    <div class="section-head reveal">
+      <p class="eyebrow">Paving &amp; tiles</p>
+      <h2>Finish the outside as strong as the walls</h2>
+      <p>Pavers, edging and flooring tiles for driveways, walkways and outdoor spaces, in patterns and colours to suit the house.</p>
+    </div>
+    <div class="card-grid four" data-stagger>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/ad-paving-trihex-sm.jpg" alt="Interlocking Y-shaped pavers in red, charcoal and grey" loading="lazy" width="720" height="680" /></div>
+        <div class="p-card-body">
+          <h3>Interlocking Pavers</h3>
+          <p>Y-shaped pavers that lock together, mixed in red, charcoal and grey for a bold pattern.</p>
+          <ul class="chips"><li>Walkways</li><li>Patios</li><li>Pool surrounds</li></ul>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/ad-paving-herringbone-sm.jpg" alt="Grey rectangular pavers laid in herringbone with a cream border" loading="lazy" width="720" height="720" /></div>
+        <div class="p-card-body">
+          <h3>Rectangular Pavers</h3>
+          <p>Classic brick-shaped pavers. Lay them herringbone for heavy traffic, with a contrasting border.</p>
+          <ul class="chips"><li>Driveways</li><li>Carports</li><li>Borders &amp; edging</li></ul>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/ad-paving-slab-sm.jpg" alt="A light grey paved driveway with a charcoal border in front of a house" loading="lazy" width="554" height="554" /></div>
+        <div class="p-card-body">
+          <h3>Driveway Paving</h3>
+          <p>Smooth, even paving with a contrasting trim, for a clean finished entrance.</p>
+          <ul class="chips"><li>Driveways</li><li>Entrances</li><li>Parking</li></ul>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-card-media"><img src="assets/img/flooring-tiles-sm.jpg" alt="Stacks of red and grey concrete flooring tiles" loading="lazy" width="405" height="720" /></div>
+        <div class="p-card-body">
+          <h3>Flooring Tiles</h3>
+          <p>Thick concrete tiles in red and grey, sold by the unit or by the pallet.</p>
+          <ul class="chips"><li>Verandas</li><li>Outdoor floors</li><li>Garden paths</li></ul>
+        </div>
+      </article>
+    </div>
+    <p class="reveal" style="text-align:center; margin-top:32px;">
+      <a class="btn btn-whatsapp" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20to%20ask%20about%20paving%20and%20tiles." target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Ask about paving</a>
+    </p>
+  </section>
 
-  <!-- ===================== CONTACT / CTA ===================== -->
-  <section class="cta" id="contact">
-    <div class="reveal">
+  <div class="tile-band" aria-hidden="true"><p>building dreams <span>·</span> brick by brick</p></div>
+
+  <!-- ===================== DELIVERY ===================== -->
+  <section id="delivery">
+    <div class="feature flip">
+      <div class="feature-media reveal">
+        <img src="assets/img/ad-delivery-sm.jpg" srcset="assets/img/ad-delivery-sm.jpg 720w, assets/img/ad-delivery.jpg 1225w" sizes="(min-width: 900px) 620px, 100vw" alt="Pangano Bricks delivery truck — brick delivery, right to your site" loading="lazy" width="1225" height="588" />
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">Delivery</p>
+        <h2>Brick delivery, right to your site.</h2>
+        <p>Orders are stacked and strapped at the yard and loaded by our own team, so what leaves is what arrives. Delivery depends on your location and order size. Send us your site location and we'll confirm.</p>
+        <a class="btn btn-whatsapp" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20delivery%20quote.%20My%20site%20is%20in%3A%20" target="_blank" rel="noopener"><svg class="icon"><use href="#i-wa"/></svg> Get a delivery quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FROM OUR YARD (real photos) ===================== -->
+  <section class="alt-bg">
+    <div class="section-head reveal">
+      <p class="eyebrow">From our yard</p>
+      <h2>Real bricks, made here</h2>
+      <p>No stock photos. This is our yard, our kilns and the stock waiting for your build.</p>
+    </div>
+    <div class="yard-grid" data-stagger>
+      <figure class="wide reveal"><img src="assets/img/yard-rows-sm.jpg" alt="Long rows of brick cubes in the Pangano yard" loading="lazy" /><figcaption>Stock ready to load</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/kiln-sm.jpg" alt="The Pangano brick kilns" loading="lazy" /><figcaption>Our kilns</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/drying-sm.jpg" alt="Freshly moulded bricks drying in rows in the sun" loading="lazy" /><figcaption>Drying before firing</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/tunnel-kiln-sm.jpg" alt="Kiln cars loaded with bricks under the factory roof" loading="lazy" /><figcaption>Into the kiln</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/brick-rustic-pillar-sm.jpg" alt="A pillar built with Pangano rustic bricks" loading="lazy" /><figcaption>Rustic brick pillar</figcaption></figure>
+      <figure class="wide reveal"><img src="assets/img/yard-loading-sm.jpg" alt="A crane truck loading brick cubes at the yard" loading="lazy" /><figcaption>Loading for delivery</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <div class="cta-wrap">
+    <section class="cta reveal">
       <h2>Let's talk about your project.</h2>
-      <p>Tell us what you're building and what you need, straight over WhatsApp, no forms, no waiting.</p>
+      <p>Tell us what you're building, how many bricks and where the site is, straight over WhatsApp. No forms, no waiting.</p>
       <a class="btn btn-whatsapp btn-lg" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" class="icon-wa"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.9C21.94 6.45 17.5 2 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.34-.51.03-1.03.24-3.5-.73-2.97-1.17-4.88-4.18-5.03-4.37-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.24.58.83 2.02.9 2.17.07.15.12.32.02.52-.1.2-.15.32-.3.5-.15.17-.31.38-.44.51-.15.15-.3.3-.13.6.17.3.76 1.26 1.64 2.04 1.13 1 2.08 1.32 2.38 1.47.3.15.48.13.65-.08.18-.2.75-.88.95-1.18.2-.3.4-.25.67-.15.28.1 1.77.83 2.07.98.3.15.5.22.58.35.07.13.07.75-.17 1.42z"/></svg>
-        Message Us on WhatsApp
+        <svg class="icon"><use href="#i-wa"/></svg> Message Us on WhatsApp
       </a>
-    </div>
-  </section>
+    </section>
+  </div>
 
 </main>
 
 <!-- ===================== FOOTER ===================== -->
 <footer class="site-footer">
-  <img src="assets/images/logo.jpeg" alt="Pangano Bricks" class="footer-logo" />
-  <nav class="footer-nav">
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <p>&copy; <span id="year"></span> Pangano Bricks. Stronger Bricks. Solid Futures.</p>
+  <div class="footer-grid">
+    <div>
+      <img src="assets/img/logo-light.png" alt="Pangano Bricks — building dreams, brick by brick" class="footer-logo" width="640" height="303" loading="lazy" />
+      <p>Bricks, paving and flooring, manufactured in our own yard and delivered to your site.</p>
+    </div>
+    <div>
+      <h4>Products</h4>
+      <ul>
+        <li><a href="products.html#common">Common bricks</a></li>
+        <li><a href="products.html#face">Face bricks</a></li>
+        <li><a href="products.html#rustic">Rustic bricks</a></li>
+        <li><a href="products.html#paving">Paving &amp; tiles</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="about.html#process">How we make bricks</a></li>
+        <li><a href="products.html#guide">Brick guide</a></li>
+        <li><a href="contact.html#faq">FAQs</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Order</h4>
+      <ul>
+        <li><a class="footer-wa" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener">WhatsApp us</a></li>
+        <li><a href="contact.html">Contact page</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span id="year"></span> Pangano Bricks. Building dreams, brick by brick.</span>
+    <span>We only take orders through our official WhatsApp number.</span>
+  </div>
 </footer>
+
+<a class="wa-float" href="https://wa.me/263000000000?text=Hi%20Pangano%20Bricks%2C%20I%27d%20like%20a%20quote." target="_blank" rel="noopener" aria-label="Chat with Pangano Bricks on WhatsApp"><svg class="icon"><use href="#i-wa"/></svg></a>
 
 <script src="script.js"></script>
 </body>
