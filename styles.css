@@ -448,3 +448,11 @@ main section { padding: 72px clamp(16px, 4vw, 48px); }
   .wa-float { display: none; }
   .brand-logo { height: 50px; }
 }
+
+/* Small label on product photos: "Our stock" vs "Where it's used" */
+.product-media figure { position: relative; margin: 0; }
+.product-media figure::after {
+  content: attr(data-tag); position: absolute; left: 10px; top: 10px;
+  padding: 4px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 700;
+  background: rgba(26,30,36,0.82); color: #fff; letter-spacing: 0.02em;
+}
