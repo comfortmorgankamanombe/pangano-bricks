@@ -555,3 +555,55 @@ main section { padding: 72px clamp(16px, 4vw, 48px); }
   padding: 4px 10px; border-radius: 99px; font-size: 0.72rem; font-weight: 700;
   background: rgba(26,30,36,0.82); color: #fff; letter-spacing: 0.02em;
 }
+
+/* ============ Brick product cards (Econet "Connect in style" look) ============
+   Each brick floats, cut out, on a dark brand card with its own glow. */
+.brick-cards { display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 1200px; margin: 0 auto; }
+@media (min-width: 760px) { .brick-cards { grid-template-columns: repeat(3, 1fr); } }
+.brick-card {
+  --glow: rgba(232,96,52,0.7);
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; flex-direction: column; border-radius: 24px; color: #fff;
+  border: 1.5px solid transparent;
+  background:
+    radial-gradient(70% 55% at 50% 30%, var(--glow), transparent 70%) padding-box,
+    linear-gradient(160deg, #16224a 0%, #10162c 55%, #1a1e24 100%) padding-box,
+    linear-gradient(140deg, rgba(255,255,255,0.35), rgba(232,115,74,0.6) 45%, rgba(22,34,74,0.6)) border-box;
+  box-shadow: 0 18px 44px rgba(14,20,40,0.22);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.brick-card::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0.14;
+  background-image: linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px);
+  background-size: 48px 24px;
+  -webkit-mask-image: linear-gradient(#000, transparent 60%); mask-image: linear-gradient(#000, transparent 60%);
+}
+.brick-card:hover { transform: translateY(-8px); box-shadow: 0 28px 60px rgba(193,80,43,0.3); }
+.brick-num {
+  position: absolute; top: 10px; left: 18px; z-index: -1;
+  font-family: "Barlow Condensed", sans-serif; font-weight: 800; font-size: 5.5rem; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.22);
+}
+.brick-stage { position: relative; height: 210px; display: grid; place-items: center; }
+.brick-stage::after { /* floor shadow */
+  content: ""; position: absolute; bottom: 30px; left: 22%; right: 22%; height: 18px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0,0,0,0.55), transparent); filter: blur(4px);
+}
+.brick-float {
+  width: 78%; max-width: 330px; position: relative; z-index: 1;
+  transform: rotate(-9deg); filter: drop-shadow(0 18px 18px rgba(0,0,0,0.45));
+  animation: brickFloat 6s ease-in-out infinite; transition: transform 0.5s ease;
+}
+.brick-card:nth-child(2) .brick-float { animation-delay: -2s; }
+.brick-card:nth-child(3) .brick-float { animation-delay: -4s; }
+.brick-card:hover .brick-float { transform: rotate(-3deg) scale(1.06); }
+@keyframes brickFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+.brick-body { padding: 0 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.brick-body h3 { font-size: 1.8rem; }
+.brick-body p { color: rgba(255,255,255,0.78); font-size: 0.94rem; line-height: 1.55; }
+.chips-dark li { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); color: #fff; }
+.brick-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 10px; flex-wrap: wrap; }
+.brick-foot .btn { padding: 11px 18px; font-size: 0.9rem; }
+.brick-link { color: #ffb08f; font-weight: 700; font-size: 0.9rem; }
+.brick-link:hover { color: #fff; }
+@media (prefers-reduced-motion: reduce) { .brick-float { animation: none; } }
