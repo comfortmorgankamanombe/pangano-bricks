@@ -25,12 +25,10 @@ if (themeToggle) {
   themeToggle.addEventListener("click", () => setTheme(currentTheme() === "dark" ? "light" : "dark"));
 }
 
-// ---------- Header shadow + floating WhatsApp button ----------
+// ---------- Header shadow ----------
 const header = document.getElementById("siteHeader");
-const waFloat = document.querySelector(".wa-float");
 function onScroll() {
   header.classList.toggle("scrolled", window.scrollY > 10);
-  if (waFloat) waFloat.classList.toggle("show", window.scrollY > 500);
 }
 window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
