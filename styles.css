@@ -607,3 +607,31 @@ main section { padding: 72px clamp(16px, 4vw, 48px); }
 .brick-link { color: #ffb08f; font-weight: 700; font-size: 0.9rem; }
 .brick-link:hover { color: #fff; }
 @media (prefers-reduced-motion: reduce) { .brick-float { animation: none; } }
+
+/* ============ Full range (products) + "also in our range" strip (home) ============ */
+.range-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 1200px; margin: 0 auto; }
+@media (min-width: 680px) { .range-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1040px) { .range-grid { grid-template-columns: repeat(3, 1fr); } }
+.range-card {
+  display: flex; gap: 16px; align-items: flex-start; padding: 20px;
+  background: var(--card-bg); border: 1px solid var(--line); border-radius: 18px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.range-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(26,30,36,0.1); }
+.range-swatch {
+  flex: 0 0 auto; width: 64px; height: 30px; margin-top: 4px; border-radius: 5px; background: var(--sw);
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.25), inset 0 2px 0 rgba(255,255,255,0.18), 0 8px 16px rgba(0,0,0,0.18);
+  transform: rotate(-6deg);
+}
+.range-card h3 { font-size: 1.35rem; }
+.range-tag { display: inline-block; margin: 4px 0 2px; padding: 2px 9px; border-radius: 99px; font-size: 0.72rem; font-weight: 700; color: var(--brand); border: 1px solid var(--brand-light); }
+.range-card p { color: var(--ink-soft); font-size: 0.93rem; line-height: 1.55; margin-top: 6px; }
+.range-use strong { color: var(--ink); }
+.range-wa { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-weight: 700; font-size: 0.9rem; color: var(--wa-dark, #1ea952); }
+.range-wa .icon { width: 18px; height: 18px; }
+.range-strip { max-width: 1200px; margin: 24px auto 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; justify-content: center; }
+.range-strip > span { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); }
+.range-strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.range-strip a { display: inline-block; padding: 7px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--card-bg); font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+.range-strip a:hover { border-color: var(--brand); color: var(--brand); }
+.mission { font-weight: 700; color: var(--ink) !important; border-left: 4px solid var(--brand); padding-left: 14px; }
