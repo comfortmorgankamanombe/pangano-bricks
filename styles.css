@@ -667,13 +667,23 @@ main section { padding: 72px clamp(16px, 4vw, 48px); }
 .bt-quote .icon { width: 18px; height: 18px; }
 .bt-after { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; justify-content: center; margin-top: 28px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-/* phones: each row becomes a small card, nothing scrolls sideways */
+/* phones: still a real table, just tighter — swatch sits above the name, Quote becomes a WhatsApp icon */
+.brick-table th + th, .brick-table td { border-left: 1px solid var(--line); }
+.brick-table thead th + th { border-left-color: rgba(255,255,255,0.12); }
 @media (max-width: 640px) {
   .brick-ad { border-radius: 16px; }
-  .brick-table thead { display: none; }
-  .brick-table tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 14px 16px; }
-  .brick-table th[scope="row"], .brick-table td { padding: 0; }
-  .brick-table th[scope="row"] { white-space: normal; }
-  .brick-table td:not(.bt-quote) { grid-column: 1 / -1; grid-row: 2; padding-left: 46px; font-size: 0.9rem; }
-  .bt-quote { grid-column: 2; grid-row: 1; }
+  .brick-table { font-size: 0.86rem; table-layout: fixed; }
+  .brick-table thead th { padding: 11px 10px; font-size: 0.66rem; letter-spacing: 0.08em; }
+  .brick-table thead th:first-child { width: 36%; }
+  .brick-table thead th:last-child { width: 48px; }
+  .brick-table th[scope="row"], .brick-table td { padding: 12px 10px; }
+  .brick-table th[scope="row"] { white-space: normal; line-height: 1.3; vertical-align: top; }
+  .brick-table td { vertical-align: top; line-height: 1.45; }
+  .bt-swatch { display: block; width: 26px; height: 12px; margin: 2px 0 8px; }
+  .bt-note { display: block; width: fit-content; max-width: 100%; margin: 6px 0 0; white-space: normal; font-size: 0.68rem; }
+  .bt-quote { text-align: center !important; vertical-align: middle !important; padding: 0 !important; }
+  .bt-quote a { width: 36px; height: 36px; justify-content: center; border-radius: 50%; background: rgba(37,211,102,0.12); }
+  .bt-quote .icon { width: 20px; height: 20px; }
+  .bt-qt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+}
 }
