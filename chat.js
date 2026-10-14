@@ -54,6 +54,7 @@
     { re: /driveway|carport|parking|\bcars?\b/, ids: ["rect"], say: "For driveways and carports:" },
     { re: /walkway|patio|pool|courtyard|path|garden/, ids: ["interlock", "tiles"], say: "For walkways, patios and paths:" },
     { re: /veranda|stoep|porch|floor/, ids: ["tiles"], say: "For verandas and outdoor floors:" },
+    { re: /\b(house|home|building a|build a|construct)/, ids: ["common", "face", "load"], say: "A house usually uses a mix: common bricks for walls you'll plaster, face bricks if the outside stays bare, and load-bearing bricks where the structure needs them. Tell me which part you're on, or let's estimate how many you need:" },
   ];
 
   const FACTS = {
@@ -248,8 +249,8 @@
     ], ["Start another quote", "How many bricks do I need?", "Delivery & hours"]);
   }
 
-  function startCalc(fromQuote) {
-    flow = { type: "calc", step: "wall", data: { fromQuote: !!fromQuote, product: fromQuote ? fromQuote.product : null } };
+  function startCalc(fromQuote, area) {
+    flow = { type: "calc", step: "wall", data: { fromQuote: !!fromQuote, product: fromQuote ? fromQuote.product : null, area: area || null } };
     say("Let's estimate it. <strong>What kind of wall?</strong>",
       ["Single wall (110 mm, half-brick)", "Double wall (230 mm, one brick)", "Not sure"]);
   }
@@ -269,6 +270,7 @@
         addNote("Most house walls in Zimbabwe are double (230 mm) on the outside and single (110 mm) for some internal walls. I'll use <strong>double</strong>, and you can change it later.");
         d.wall = "double";
       }
+      if (d.area) return calcResult();
       flow.step = "size";
       return say("<strong>How big is the wall?</strong> Type the total length and height in metres, like <em>30 x 2.4</em>, or an area like <em>72 m2</em>.",
         ["10 x 2", "30 x 2.4", "50 m2"]);
@@ -328,23 +330,42 @@
   }
 
   // ---------- Built-in answers ----------
+  const GREET = /^(hi+|hey+|hello+|hie|helo|howzit|yo|mhoro|makadii|makadini|mangwanani|masikati|manheru|good (morning|afternoon|evening|day))\b[\s,!.]*/;
+  const BRICKISH = /brick|paver|paving|tile|wall|build|house|construct|chidhinha|zvidhinha|dhinha/;
+
   function reply(raw) {
-    const t = raw.toLowerCase();
+    let t = raw.toLowerCase().replace(/[’']/g, "'").replace(/[?!.,]+/g, " ").replace(/\s+/g, " ").trim();
+    t = t.replace(/\bbriks?\b|\bbrik\b|\bbrickz\b/g, "bricks").replace(/zvidhinha|chidhinha|madhinha/g, "bricks");
+    const greeted = GREET.test(t);
+    if (greeted) t = t.replace(GREET, "").trim();
+    if (greeted && !t) {
+      const again = history.filter((m) => m.from === "me").length > 1;
+      return say(again ? "Hi again! What are you building? I can suggest bricks, estimate how many you need or put a quote together."
+        : "Hi! 👋 What are you building? I can suggest the right bricks, estimate how many you need, or put your quote together for WhatsApp.", MAIN_CHIPS);
+    }
 
     if (has(t, /^get a quote for this$/)) return startQuote({ qty: lastEstimate });
     if (has(t, /^(start another quote|get a quote|quote|i want to order|order|buy)\b/) || has(t, /\b(get|want|need|request)\b.*\bquote\b|\bplace an? order\b/)) {
       const ids = findProducts(t);
       return startQuote(ids.length ? { product: ids.map((id) => byId[id].name).join(" + ") } : {});
     }
-    if (has(t, /how many|calculat|estimate|quantity of|number of bricks|how much bricks/) || has(t, /^calculate another wall$/)) return startCalc();
+    // "I need 5000 common bricks" → straight into a quote with both filled in
+    const qtyMatch = t.match(/\b(\d{1,3}(?:[ ,]\d{3})+|\d+(?:\.\d+)?\s?k|\d{2,})\b/);
+    const named = findProducts(t);
+    if (qtyMatch && named.length && !has(t, /\b(m2|m²|metres?|meters?|x)\b/))
+      return startQuote({ product: named.map((id) => byId[id].name).join(" + "), qty: qtyMatch[1].replace(/\s?k$/, "000") });
+    if (has(t, /\bcement\b/) && !has(t, /brick|block/))
+      return say(["We don't sell bags of cement, but we do supply <strong>cement bricks</strong>:", productCards(["cement"])], ["Quote for cement bricks", "See all bricks"]);
+    if (has(t, /how many|calculat|estimate|quantity of|number of bricks|how much bricks/) || has(t, /^calculate another wall$/)) {
+      const size = parseSize(t);
+      return startCalc(null, size && (size.area != null ? size.area : size.length != null ? size.length * size.height : null));
+    }
 
-    if (has(t, /^(hi|hey|hello|hie|howzit|mhoro|makadii|mangwanani|masikati|manheru|good (morning|afternoon|evening))\b/))
-      return say("Hi! 👋 I'm Pangano's assistant. I can help you pick the right brick, work out how many you need, or put your quote together for WhatsApp. What are you building?", MAIN_CHIPS);
     if (has(t, /thank|ndatenda|tatenda|appreciate|cheers/))
       return say("You're welcome! Anything else I can help with?", ["Get a quote", "How many bricks do I need?", "Talk to a person"]);
 
-    if (has(t, /scam|fake|fraud|legit|genuine|trust|brealb|official/)) return say(fmt(FACTS.scam), ["Get a quote", "Where are you?"]);
-    if (has(t, /price|cost|how much|\bmari\b|\brates?\b|charges?|cheap|expensive|\$|usd|per thousand/)) {
+    if (has(t, /scam|fake|fraud|legit|genuine|trust|\breal\b|official/)) return say(fmt(FACTS.scam), ["Get a quote", "Where are you?"]);
+    if (has(t, /price|cost|how much|\bmari\b|mutengo|marii|\brates?\b|charges?|cheap|expensive|\$|usd|per thousand/)) {
       const ids = findProducts(t);
       return say(fmt(FACTS.price), [ids.length ? `Quote for ${byId[ids[0]].name.toLowerCase()}` : "Get a quote", "How many bricks do I need?"]);
     }
@@ -355,10 +376,18 @@
       return say(out, ["Get a quote", "Where are you?"]);
     }
     if (has(t, /who are you|about (you|pangano)|manufactur|do you make|your own|factory|kiln|company/)) return say(fmt(FACTS.who), ["What do you sell?", "Get a quote"]);
-    if (has(t, /what do you (sell|have|stock)|products|range|types|kinds|catalog|list|which brick for my job|what bricks/)) {
+    const RANGE = /\b(types?|kinds?|sorts?|variet(y|ies)|options?|range|products?|catalog(ue)?|selection|categor(y|ies)|list)\b|what (bricks|pavers|do you (sell|have|stock|offer|supply))|\b(do|can) you (sell|have|stock|offer|supply)\b|\bavailable\b|in stock|show me|what bricks/;
+    const CHOOSE = /which brick for my job|which bricks? (should|do|can|to)|what bricks? (should|do i need|to use)|recommend|suggest|best bricks?|help me choose|advice|advise/;
+    const askJob = has(t, /which brick for my job/) || (has(t, CHOOSE) && !findJob(t) && !findProducts(t).length);
+    if (askJob) return say("Tell me what you're building and I'll point you to the right brick. For example: <em>foundation</em>, <em>boundary wall</em>, <em>house exterior</em>, <em>gate pillars</em>, <em>driveway</em>.",
+      ["Foundation", "Plastered walls", "House exterior, no plaster", "Gate pillars", "Boundary wall", "Driveway", "Patio / walkway"]);
+    if (has(t, RANGE) && has(t, /paver|paving/) && !has(t, /brick/)) return say(["Here's our paving and flooring:", productCards(["interlock", "rect", "tiles"])], ["Get a quote", "See all bricks"]);
+    if (has(t, RANGE)) {
+      const named = findProducts(t);
+      if (named.length && !has(t, /which brick for my job/)) return say([productCards(named)], [`Quote for ${byId[named[0]].name.toLowerCase()}`, "How many bricks do I need?", "See all bricks"]);
       if (has(t, /which brick for my job/)) return say("Tell me what you're building and I'll point you to the right brick. For example: <em>foundation</em>, <em>boundary wall</em>, <em>house exterior</em>, <em>gate pillars</em>, <em>driveway</em>.",
         ["Foundation", "Plastered walls", "House exterior, no plaster", "Gate pillars", "Boundary wall", "Driveway", "Patio / walkway"]);
-      return say(["Here's our full range:", productCards(["common", "load", "face", "rustic", "black", "semi", "blue", "cement", "botswana"]), productCards(["interlock", "rect", "tiles"])],
+      return say(["Here's everything we supply. Tap any one for details, or tell me what you're building and I'll narrow it down:", productCards(["common", "load", "face", "rustic", "black", "semi", "blue", "cement", "botswana"]), productCards(["interlock", "rect", "tiles"])],
         ["Which brick for my job?", "Get a quote"]);
     }
 
@@ -383,6 +412,10 @@
     if (has(t, /phase|split|schedule|stages/)) return say(fmt(FACTS.delivery), ["Get a quote"]);
     if (has(t, /human|agent|person|someone|call|phone|number|contact|whatsapp|talk to/))
       return say(`You can reach a person any time on WhatsApp: <strong>+263 77 236 0468</strong>. We're open 24/7.${waButton("Hi Pangano Bricks, I'd like to talk to someone.", "Open WhatsApp")}`, ["Get a quote"]);
+    if (has(t, /^see all bricks$/)) return reply("what types of bricks");
+    if (has(t, BRICKISH))
+      return say(["I can help with that. Tell me what you're building (for example <em>boundary wall</em>, <em>house exterior</em> or <em>driveway</em>) and I'll suggest the right brick. Here's what we supply:",
+        productCards(["common", "load", "face", "rustic", "black", "semi", "blue", "cement", "botswana"])], ["Which brick for my job?", "How many bricks do I need?", "Get a quote"]);
     return say(`I'm not sure about that one. A person on our team can answer it on WhatsApp, any time.${waButton(`Hi Pangano Bricks, ${raw}`, "Ask on WhatsApp")}`, MAIN_CHIPS);
   }
 
@@ -428,6 +461,13 @@
       if (/^(cancel|stop|start over|restart|menu)$/i.test(text)) {
         flow = null;
         await say("No problem. What would you like to do?", MAIN_CHIPS);
+      } else if (flow && !fromChip && /\?|^(how|what|which|who|why|when|do|does|can|could|is|are|hi|hello|hey|mhoro|makadii)\b/i.test(text)
+                 && !(flow.type === "calc" && /\d/.test(text))) {
+        flow = null;
+        if (aiAvailable) {
+          aiTurns.push({ role: "user", content: text.slice(0, 500) });
+          if (!(await askAI(text))) await reply(text);
+        } else await reply(text);
       } else if (flow && flow.type === "quote") {
         await quoteStep(text);
       } else if (flow && flow.type === "calc") {
