@@ -635,3 +635,45 @@ main section { padding: 72px clamp(16px, 4vw, 48px); }
 .range-strip a { display: inline-block; padding: 7px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--card-bg); font-size: 0.88rem; font-weight: 600; color: var(--ink); }
 .range-strip a:hover { border-color: var(--brand); color: var(--brand); }
 .mission { font-weight: 700; color: var(--ink) !important; border-left: 4px solid var(--brand); padding-left: 14px; }
+
+/* ============ Home brick section: branded advert + brick-type table ============ */
+.brick-ad {
+  max-width: 960px; margin: 0 auto; border-radius: 22px; overflow: hidden; background: #fff;
+  border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(14,20,40,0.14);
+}
+.brick-ad img { display: block; width: 100%; height: auto; }
+.brick-table-wrap { max-width: 960px; margin: 24px auto 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--card-bg); }
+.brick-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.brick-table caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.brick-table thead th {
+  background: var(--ink-fixed); color: #fff; text-align: left; padding: 14px 20px;
+  font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.12em;
+}
+.brick-table tbody tr { border-top: 1px solid var(--line); transition: background 0.2s ease; }
+.brick-table tbody tr:hover { background: rgba(232,115,74,0.06); }
+.brick-table th[scope="row"], .brick-table td { padding: 14px 20px; text-align: left; vertical-align: middle; }
+.brick-table th[scope="row"] { font-weight: 700; white-space: nowrap; }
+.brick-table th[scope="row"] a { color: var(--ink); }
+.brick-table th[scope="row"] a:hover { color: var(--brand); }
+.brick-table td { color: var(--ink-soft); line-height: 1.5; }
+.bt-swatch {
+  display: inline-block; vertical-align: middle; width: 34px; height: 16px; margin-right: 12px; border-radius: 3px;
+  background: var(--sw); transform: rotate(-6deg);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25), 0 4px 8px rgba(0,0,0,0.18);
+}
+.bt-note { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 99px; font-size: 0.72rem; font-weight: 700; color: var(--brand); border: 1px solid var(--brand-light); white-space: nowrap; }
+.bt-quote { text-align: right !important; white-space: nowrap; }
+.bt-quote a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.88rem; color: #1ea952; }
+.bt-quote .icon { width: 18px; height: 18px; }
+.bt-after { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; justify-content: center; margin-top: 28px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* phones: each row becomes a small card, nothing scrolls sideways */
+@media (max-width: 640px) {
+  .brick-ad { border-radius: 16px; }
+  .brick-table thead { display: none; }
+  .brick-table tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 14px 16px; }
+  .brick-table th[scope="row"], .brick-table td { padding: 0; }
+  .brick-table th[scope="row"] { white-space: normal; }
+  .brick-table td:not(.bt-quote) { grid-column: 1 / -1; grid-row: 2; padding-left: 46px; font-size: 0.9rem; }
+  .bt-quote { grid-column: 2; grid-row: 1; }
+}
