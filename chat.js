@@ -36,8 +36,6 @@
       keys: /interlock|\bpavers?\b(?!.*(rect|driveway|herring))|paving/, use: "Walkways, patios, pool surrounds and courtyards. Red, charcoal, grey or a mix." },
     { id: "rect", name: "Rectangular Pavers & Edging", sw: "linear-gradient(135deg,#8c8f94,#5d6066)", link: "products.html#paving",
       keys: /rectang|herring|edging|kerb|border/, use: "Driveways, carports and parking. Herringbone is the strongest pattern for cars turning." },
-    { id: "tiles", name: "Flooring Tiles", sw: "linear-gradient(135deg,#b4492a 0 50%,#8c8f94 50%)", link: "products.html#paving",
-      keys: /tile|floor/, use: "Verandas, outdoor floors, garden paths and stoeps. Red and grey." },
   ];
   const byId = Object.fromEntries(PRODUCTS.map((p) => [p.id, p]));
 
@@ -52,15 +50,14 @@
     { re: /boundary|security wall|durawall|perimeter|fence/, ids: ["common", "face", "cement"], say: "For a boundary wall: common or cement bricks if you'll plaster it, face bricks if it stays bare:" },
     { re: /extension|outbuilding|cottage|servant|garage|shed|budget|cheap|afford/, ids: ["semi", "common", "cement"], say: "For extensions and outbuildings on a budget:" },
     { re: /driveway|carport|parking|\bcars?\b/, ids: ["rect"], say: "For driveways and carports:" },
-    { re: /walkway|patio|pool|courtyard|path|garden/, ids: ["interlock", "tiles"], say: "For walkways, patios and paths:" },
-    { re: /veranda|stoep|porch|floor/, ids: ["tiles"], say: "For verandas and outdoor floors:" },
+    { re: /walkway|patio|pool|courtyard|path|garden/, ids: ["interlock"], say: "For walkways, patios and paths:" },
     { re: /\b(house|home|building a|build a|construct)/, ids: ["common", "face", "load"], say: "A house usually uses a mix: common bricks for walls you'll plaster, face bricks if the outside stays bare, and load-bearing bricks where the structure needs them. Tell me which part you're on, or let's estimate how many you need:" },
   ];
 
   const FACTS = {
     delivery: "We deliver anywhere. Send your site location and we'll include the delivery cost in your quote. Orders are stacked, strapped and delivered straight to site, and big builds can be split into phases (foundation, walls, paving).",
     hours: "We're open 24 hours, 7 days a week, and we reply on WhatsApp at any time.",
-    where: "Harare: 8 Temple Bar Building, Cnr N. Mandela / Anyway St, Harare.\nBindura: 767 Bindura CBD.\nYard: Piki area, Shashi.",
+    where: "Harare: 8 Temple Bar Building, Cnr N. Mandela / Angwa St, Harare.\nBindura: 767 Bindura CBD.\nYard: Piki area, Shashi.",
     price: "Prices move with the market, so we don't post a price list. We quote competitive prices on WhatsApp, usually within minutes. Tell me what you need and I'll put the quote request together for you.",
     pay: "Payment options are confirmed with your quote on WhatsApp. Only ever pay using details given by our official number, +263 77 236 0468.",
     scam: "Pangano Bricks only takes orders and payments through our official WhatsApp number, +263 77 236 0468. If someone claiming to be Pangano asks you to pay into a different account, don't pay. Message us first to confirm.",
@@ -216,7 +213,7 @@
     flow = { type: "quote", step: "product", data: { ...preset } };
     if (flow.data.product) return askQty();
     say("Great, let's build your quote. <strong>What do you need?</strong> Pick one, or type it (e.g. “face bricks and pavers”).",
-      ["Red common bricks", "Face bricks", "Rustic face bricks", "Load-bearing bricks", "Cement bricks", "Pavers", "Flooring tiles", "A mix / not sure"]);
+      ["Red common bricks", "Face bricks", "Rustic face bricks", "Load-bearing bricks", "Cement bricks", "Pavers", "A mix / not sure"]);
   }
   function askQty() {
     if (flow.data.qty) return askWhere();
@@ -316,7 +313,7 @@
     if (flow.step === "product") {
       const ids = findProducts(t.toLowerCase());
       d.product = /mix|not sure/i.test(t) ? "A mix (please advise)"
-        : /^pavers?$|^(red common|face|rustic face|load-bearing|cement) bricks$|^flooring tiles$/i.test(t.trim()) ? t.trim()
+        : /^pavers?$|^(red common|face|rustic face|load-bearing|cement) bricks$/i.test(t.trim()) ? t.trim()
         : ids.length ? ids.map((id) => byId[id].name).join(" + ") : t;
       return askQty();
     }
@@ -354,6 +351,8 @@
     const named = findProducts(t);
     if (qtyMatch && named.length && !has(t, /\b(m2|m²|metres?|meters?|x)\b/))
       return startQuote({ product: named.map((id) => byId[id].name).join(" + "), qty: qtyMatch[1].replace(/\s?k$/, "000") });
+    if (has(t, /\btiles?\b|flooring/))
+      return say(["We don't supply flooring tiles. For outdoor surfaces we supply <strong>pavers</strong>:", productCards(["interlock", "rect"])], ["Quote for pavers", "See all bricks"]);
     if (has(t, /\bcement\b/) && !has(t, /brick|block/))
       return say(["We don't sell bags of cement, but we do supply <strong>cement bricks</strong>:", productCards(["cement"])], ["Quote for cement bricks", "See all bricks"]);
     if (has(t, /how many|calculat|estimate|quantity of|number of bricks|how much bricks/) || has(t, /^calculate another wall$/)) {
@@ -381,13 +380,13 @@
     const askJob = has(t, /which brick for my job/) || (has(t, CHOOSE) && !findJob(t) && !findProducts(t).length);
     if (askJob) return say("Tell me what you're building and I'll point you to the right brick. For example: <em>foundation</em>, <em>boundary wall</em>, <em>house exterior</em>, <em>gate pillars</em>, <em>driveway</em>.",
       ["Foundation", "Plastered walls", "House exterior, no plaster", "Gate pillars", "Boundary wall", "Driveway", "Patio / walkway"]);
-    if (has(t, RANGE) && has(t, /paver|paving/) && !has(t, /brick/)) return say(["Here's our paving and flooring:", productCards(["interlock", "rect", "tiles"])], ["Get a quote", "See all bricks"]);
+    if (has(t, RANGE) && has(t, /paver|paving/) && !has(t, /brick/)) return say(["Here's our paving:", productCards(["interlock", "rect"])], ["Get a quote", "See all bricks"]);
     if (has(t, RANGE)) {
       const named = findProducts(t);
       if (named.length && !has(t, /which brick for my job/)) return say([productCards(named)], [`Quote for ${byId[named[0]].name.toLowerCase()}`, "How many bricks do I need?", "See all bricks"]);
       if (has(t, /which brick for my job/)) return say("Tell me what you're building and I'll point you to the right brick. For example: <em>foundation</em>, <em>boundary wall</em>, <em>house exterior</em>, <em>gate pillars</em>, <em>driveway</em>.",
         ["Foundation", "Plastered walls", "House exterior, no plaster", "Gate pillars", "Boundary wall", "Driveway", "Patio / walkway"]);
-      return say(["Here's everything we supply. Tap any one for details, or tell me what you're building and I'll narrow it down:", productCards(["common", "load", "face", "rustic", "black", "semi", "blue", "cement", "botswana"]), productCards(["interlock", "rect", "tiles"])],
+      return say(["Here's everything we supply. Tap any one for details, or tell me what you're building and I'll narrow it down:", productCards(["common", "load", "face", "rustic", "black", "semi", "blue", "cement", "botswana"]), productCards(["interlock", "rect"])],
         ["Which brick for my job?", "Get a quote"]);
     }
 

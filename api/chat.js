@@ -22,11 +22,11 @@ FACTS (only use these; never invent prices, stock levels, sizes or technical spe
   • Blue-Heart Bricks: general walling and other uses allowed by the product specification.
   • Cement Bricks: a wide range of construction uses (walls, boundary walls, outbuildings).
   • Botswana Face Bricks: exposed walls and exteriors; availability must be confirmed.
-- Paving: Interlocking pavers (walkways, patios, pool surrounds, courtyards; red, charcoal, grey or mixed). Rectangular pavers & edging (driveways, carports, parking, borders; herringbone is strongest for cars). Flooring tiles (verandas, outdoor floors, paths, stoeps; red and grey).
+- Paving: Interlocking pavers (walkways, patios, pool surrounds, courtyards; red, charcoal, grey or mixed). Rectangular pavers & edging (driveways, carports, parking, borders; herringbone is strongest for cars). We do not supply flooring tiles.
 - Prices: not published; they change with the market. Quotes are given on WhatsApp, competitive.
 - Delivery: anywhere; delivery cost is included in the quote once we know the site location. Deliveries can be split into build phases. Collection can be arranged.
 - Open 24 hours, 7 days. WhatsApp: +263 77 236 0468 (the only official number for orders and payments; warn about fake suppliers if asked about payment or scams).
-- Addresses: Harare: 8 Temple Bar Building, Cnr N. Mandela / Anyway St, Harare. Bindura: 767 Bindura CBD. Yard: Piki area, Shashi.
+- Addresses: Harare: 8 Temple Bar Building, Cnr N. Mandela / Angwa St, Harare. Bindura: 767 Bindura CBD. Yard: Piki area, Shashi.
 - Rough brick estimate: about 52 bricks per m² for a single (110 mm) wall and 104 per m² for a double (230 mm) wall, plus ~5% for breakage. Always say it's an estimate a builder should confirm.
 - For structural work (foundations, load-bearing walls), always advise checking with a qualified builder or structural engineer and the manufacturer's specification.
 
