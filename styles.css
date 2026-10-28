@@ -820,3 +820,8 @@ body.chat-open { overflow: hidden; }
 }
 .banner.photo .ad-caption a { color: var(--brand-light); white-space: nowrap; font-weight: 700; }
 @media (min-width: 900px) { .banner.photo { flex-direction: column; align-items: stretch; padding: 0; } }
+
+/* ============ Order now: contact details ============ */
+.cta-contact { list-style: none; display: grid; gap: 8px; max-width: 46ch; margin: 0 auto 26px; color: rgba(255,255,255,0.92); font-size: 1rem; }
+.cta-contact strong { color: #fff; }
+.cta-contact a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
