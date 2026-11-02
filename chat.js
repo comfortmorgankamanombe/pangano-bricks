@@ -56,8 +56,8 @@
 
   const FACTS = {
     delivery: "We deliver anywhere. Send your site location and we'll include the delivery cost in your quote. Orders are stacked, strapped and delivered straight to site, and big builds can be split into phases (foundation, walls, paving).",
-    hours: "We're open 24 hours, 7 days a week, and we reply on WhatsApp at any time.",
-    where: "Harare: 8 Temple Bar Building, Cnr N. Mandela / Angwa St, Harare.\nBindura: 767 Bindura CBD.\nYard: Piki area, Shashi.",
+    hours: "We're open from 8am to 8pm. Message us on WhatsApp and we'll reply.",
+    where: "Harare: 8 Temple Bar Building, Cnr N. Mandela / Angwa St, Harare.\nBindura: 767 Bindura CBD.",
     price: "Prices move with the market, so we don't post a price list. We quote competitive prices on WhatsApp, usually within minutes. Tell me what you need and I'll put the quote request together for you.",
     pay: "Payment options are confirmed with your quote on WhatsApp. Only ever pay using details given by our official number, +263 77 236 0468.",
     scam: "Pangano Bricks only takes orders and payments through our official WhatsApp number, +263 77 236 0468. If someone claiming to be Pangano asks you to pay into a different account, don't pay. Message us first to confirm.",
@@ -89,7 +89,7 @@
   panel.innerHTML = `
     <header class="chat-head">
       <span class="chat-avatar"><img src="assets/img/icon-180.png" alt="" width="40" height="40" /></span>
-      <div class="chat-title"><strong>Pangano Assistant</strong><span><i></i>Online 24/7 · replies instantly</span></div>
+      <div class="chat-title"><strong>Pangano Assistant</strong><span><i></i>Online · replies instantly</span></div>
       <button class="chat-restart" type="button" aria-label="Start a new chat" title="Start again"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg></button>
       <button class="chat-close" type="button" aria-label="Close chat"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </header>
@@ -410,12 +410,12 @@
     if (has(t, /minimum|small order|few bricks|how few/)) return say(fmt(FACTS.min), ["Get a quote", "How many bricks do I need?"]);
     if (has(t, /phase|split|schedule|stages/)) return say(fmt(FACTS.delivery), ["Get a quote"]);
     if (has(t, /human|agent|person|someone|call|phone|number|contact|whatsapp|talk to/))
-      return say(`You can reach a person any time on WhatsApp: <strong>+263 77 236 0468</strong>. We're open 24/7.${waButton("Hi Pangano Bricks, I'd like to talk to someone.", "Open WhatsApp")}`, ["Get a quote"]);
+      return say(`You can reach a person on WhatsApp: <strong>+263 77 236 0468</strong>. We're open 8am – 8pm.${waButton("Hi Pangano Bricks, I'd like to talk to someone.", "Open WhatsApp")}`, ["Get a quote"]);
     if (has(t, /^see all bricks$/)) return reply("what types of bricks");
     if (has(t, BRICKISH))
       return say(["I can help with that. Tell me what you're building (for example <em>boundary wall</em>, <em>house exterior</em> or <em>driveway</em>) and I'll suggest the right brick. Here's what we supply:",
         productCards(["common", "load", "face", "rustic", "black", "semi", "blue", "cement", "botswana"])], ["Which brick for my job?", "How many bricks do I need?", "Get a quote"]);
-    return say(`I'm not sure about that one. A person on our team can answer it on WhatsApp, any time.${waButton(`Hi Pangano Bricks, ${raw}`, "Ask on WhatsApp")}`, MAIN_CHIPS);
+    return say(`I'm not sure about that one. A person on our team can answer it on WhatsApp.${waButton(`Hi Pangano Bricks, ${raw}`, "Ask on WhatsApp")}`, MAIN_CHIPS);
   }
 
   // ---------- AI (optional) ----------
